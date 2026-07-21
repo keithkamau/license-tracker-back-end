@@ -1,0 +1,29 @@
+LICENSE EXPIRY REMINDER
+
+Dear {{ agent_name }},
+
+{% if days_remaining <= 7 %}
+URGENT: Your IRA practicing certificate will expire in {{ days_remaining }} days.
+Please take immediate action to avoid non-compliance.
+{% else %}
+Your IRA practicing certificate will expire in {{ days_remaining }} days.
+Please prepare for renewal.
+{% endif %}
+
+License Details:
+- License Number: {{ license_number }}
+- Expiry Date: {{ expiry_date|date:"F j, Y" }}
+- Days Remaining: {{ days_remaining }}
+
+Please ensure you renew your license before the expiry date to maintain compliance with IRA regulations.
+
+To upload your renewed certificate, please visit:
+{{ renewal_url }}
+
+If you have already renewed your license, please ignore this reminder.
+
+For any questions or assistance, please contact HR.
+
+---
+© {{ current_year }} {{ company_name }}
+This is an automated message. Please do not reply to this email.

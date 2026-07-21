@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to License Compliance Tracker</title>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.5;
+            color: #1F2937;
+            margin: 0;
+            padding: 0;
+            background-color: #F9FAFB;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #FFFFFF;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background-color: #027CD0;
+            color: white;
+            padding: 32px 24px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .content {
+            padding: 32px 24px;
+        }
+        .role-badge {
+            display: inline-block;
+            background-color: #E0F2FE;
+            color: #027CD0;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 16px 0;
+        }
+        .button {
+            display: inline-block;
+            background-color: #027CD0;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-top: 16px;
+        }
+        .features {
+            margin: 24px 0;
+            padding: 0;
+            list-style: none;
+        }
+        .features li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+        }
+        .features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #22C55E;
+            font-weight: bold;
+        }
+        .footer {
+            background-color: #F9FAFB;
+            padding: 24px;
+            text-align: center;
+            font-size: 12px;
+            color: #6B7280;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Welcome to License Compliance Tracker</h1>
+        </div>
+        
+        <div class="content">
+            <p>Dear {{ user_name }},</p>
+            
+            <p>Your account has been successfully created in the License Compliance Tracker system.</p>
+            
+            <div class="role-badge">
+                Role: {{ role }}
+            </div>
+            
+            <p>With this system, you can:</p>
+            <ul class="features">
+                <li>Track your IRA practicing certificate status</li>
+                <li>Upload renewed certificates</li>
+                <li>Receive automatic reminders before expiry</li>
+                <li>View your compliance history</li>
+            </ul>
+            
+            <p>To get started, please log in to your account:</p>
+            <a href="{{ login_url }}" class="button">Log In to Your Account</a>
+            
+            <p style="margin-top: 24px;">
+                <strong>Important:</strong> If you are an agent, please upload your current IRA 
+                practicing certificate as soon as possible to ensure compliance.
+            </p>
+            
+            <p>If you have any questions or need assistance, please contact HR.</p>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; {{ current_year }} {{ company_name }}. All rights reserved.</p>
+            <p>This is an automated message. Please do not reply to this email.</p>
+        </div>
+    </div>
+</body>
+</html>
