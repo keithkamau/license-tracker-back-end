@@ -12,6 +12,7 @@ class NotificationViewSet(viewsets.ModelViewSet):
     """ViewSet for managing notifications."""
     serializer_class = NotificationSerializer
     permission_classes = [permissions.IsAuthenticated]
+    queryset = Notification.objects.none()  # Add this line
     
     def get_queryset(self):
         """Return notifications for the current user."""

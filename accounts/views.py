@@ -64,7 +64,7 @@ class UserViewSet(viewsets.ModelViewSet):
     ViewSet for user management.
     Admins and HR can view all users, agents can only view their own profile.
     """
-    queryset = User.objects.all()
+    queryset = User.objects.all()  # Add default queryset
     throttle_classes = [UserRateThrottle]
     
     def get_serializer_class(self):
@@ -89,7 +89,7 @@ class UserViewSet(viewsets.ModelViewSet):
         
         # Try to get from cache
         cached_queryset = cache.get(cache_key)
-        if cached_queryset:
+        if cached_queryset is not None:
             return cached_queryset
         
         # Admins and HR can see all users

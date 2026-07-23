@@ -1,5 +1,4 @@
-from rest_framework import viewsets, permissions, views
-from rest_framework.response import Response
+from rest_framework import viewsets, permissions
 from django.core.cache import cache
 from .models import AuditLog
 from .serializers import AuditLogSerializer
@@ -9,6 +8,7 @@ class AuditLogViewSet(viewsets.ReadOnlyModelViewSet):
     """ViewSet for viewing audit logs (admin only)."""
     serializer_class = AuditLogSerializer
     permission_classes = [permissions.IsAuthenticated]
+    queryset = AuditLog.objects.none()  # Add this line
     
     def get_queryset(self):
         user = self.request.user
@@ -16,12 +16,6 @@ class AuditLogViewSet(viewsets.ReadOnlyModelViewSet):
         # Only admin and HR can view audit logs
         if not (user.is_admin or user.is_hr):
             return AuditLog.objects.none()
-        
-        cache_key = f'audit_logs_{self.request.query_params}'
-        cached = cache.get(cache_key)
-        
-        if cached:
-            return cached
         
         queryset = AuditLog.objects.select_related('user').all()
         
@@ -42,8 +36,5 @@ class AuditLogViewSet(viewsets.ReadOnlyModelViewSet):
             queryset = queryset.filter(created_at__gte=date_from)
         if date_to:
             queryset = queryset.filter(created_at__lte=date_to)
-        
-        # Cache for 5 minutes
-        cache.set(cache_key, queryset, 300)
         
         return queryset

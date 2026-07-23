@@ -10,12 +10,17 @@ RUN apt-get update && apt-get install -y \
     gcc \
     postgresql-client \
     libpq-dev \
+    netcat-traditional \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
+
+# Create necessary directories
+RUN mkdir -p /app/logs /app/staticfiles /app/media
+RUN touch /app/logs/django.log
 
 RUN python manage.py collectstatic --noinput
 

@@ -24,7 +24,7 @@ class LicenseViewSet(viewsets.ModelViewSet):
     ViewSet for managing agent licenses.
     Provides CRUD operations with role-based access control.
     """
-    queryset = License.objects.select_related('agent').all()
+    queryset = License.objects.select_related('agent').all()  # Add default queryset
     filterset_class = LicenseFilter
     parser_classes = [MultiPartParser, FormParser]
     
@@ -50,7 +50,7 @@ class LicenseViewSet(viewsets.ModelViewSet):
         
         # Try cache first
         cached = cache.get(cache_key)
-        if cached:
+        if cached is not None:
             return cached
         
         queryset = License.objects.select_related('agent').all()
