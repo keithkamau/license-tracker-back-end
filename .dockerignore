@@ -1,52 +1,17 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-*.egg-info/
-dist/
-build/
-eggs/
-*.egg
-*.whl
-
-# Virtual Environment
 venv/
 env/
-ENV/
-.venv
-
-# Django
-logs/
+__pycache__/
+*.pyc
+*.pyo
 *.log
+db.sqlite3
 media/
 staticfiles/
-
-# Git
 .git/
 .gitignore
-
-# Docker
+.env
+.env.docker
 Dockerfile
 docker-compose.yml
-.dockerignore
-
-# IDE
 .vscode/
 .idea/
-*.swp
-*.swo
-*~
-.DS_Store
-
-# Environment
-.env
-.env.local
-
-# Tests
-.pytest_cache/
-.coverage
-htmlcov/
-
-# Node (if any)
-node_modules/
