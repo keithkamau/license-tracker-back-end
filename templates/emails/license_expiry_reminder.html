@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>License Expiry Reminder</title>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.5;
+            color: #1F2937;
+            margin: 0;
+            padding: 0;
+            background-color: #F9FAFB;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #FFFFFF;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background-color: #027CD0;
+            color: white;
+            padding: 32px 24px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .content {
+            padding: 32px 24px;
+        }
+        .alert {
+            background-color: #FEF3C7;
+            border-left: 4px solid #F59E0B;
+            padding: 16px;
+            margin: 24px 0;
+            border-radius: 4px;
+        }
+        .alert.urgent {
+            background-color: #FEE2E2;
+            border-left-color: #EF4444;
+        }
+        .info-box {
+            background-color: #F3F4F6;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 24px 0;
+        }
+        .info-item {
+            margin-bottom: 12px;
+        }
+        .info-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6B7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .info-value {
+            font-size: 16px;
+            font-weight: 500;
+            color: #1F2937;
+        }
+        .button {
+            display: inline-block;
+            background-color: #027CD0;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-top: 16px;
+        }
+        .footer {
+            background-color: #F9FAFB;
+            padding: 24px;
+            text-align: center;
+            font-size: 12px;
+            color: #6B7280;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .status-warning {
+            background-color: #FEF3C7;
+            color: #92400E;
+        }
+        .status-danger {
+            background-color: #FEE2E2;
+            color: #991B1B;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>License Expiry Reminder</h1>
+        </div>
+        
+        <div class="content">
+            <p>Dear {{ agent_name }},</p>
+            
+            {% if days_remaining <= 7 %}
+            <div class="alert urgent">
+                <strong>URGENT:</strong> Your IRA practicing certificate will expire in <strong>{{ days_remaining }} days</strong>. Please take immediate action to avoid non-compliance.
+            </div>
+            {% else %}
+            <div class="alert">
+                <strong>Reminder:</strong> Your IRA practicing certificate will expire in <strong>{{ days_remaining }} days</strong>. Please prepare for renewal.
+            </div>
+            {% endif %}
+            
+            <div class="info-box">
+                <div class="info-item">
+                    <div class="info-label">License Number</div>
+                    <div class="info-value">{{ license_number }}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Expiry Date</div>
+                    <div class="info-value">{{ expiry_date|date:"F j, Y" }}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Days Remaining</div>
+                    <div class="info-value">
+                        <span class="status-badge {% if days_remaining <= 7 %}status-danger{% else %}status-warning{% endif %}">
+                            {{ days_remaining }} days
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            <p>Please ensure you renew your license before the expiry date to maintain compliance with IRA regulations. Failure to renew may result in:</p>
+            <ul>
+                <li>Inability to practice as an insurance agent</li>
+                <li>Regulatory fines and penalties</li>
+                <li>Suspension of your license</li>
+            </ul>
+            
+            <p>To upload your renewed certificate, please visit:</p>
+            <a href="{{ renewal_url }}" class="button">Upload Renewed License</a>
+            
+            <p style="margin-top: 24px;">If you have already renewed your license, please ignore this reminder.</p>
+            
+            <p>For any questions or assistance, please contact HR.</p>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; {{ current_year }} {{ company_name }}. All rights reserved.</p>
+            <p>This is an automated message. Please do not reply to this email.</p>
+        </div>
+    </div>
+</body>
+</html>
